@@ -21,7 +21,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 			if (m_pRenderer != 0) // renderer success
 			{
 				std::cout << "Renderer creation success\n";
-				SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+				SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
 			}
 			else
 			{
@@ -83,5 +83,5 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	// do stuff
+	m_sourceRectangle.x = 128 * int(((SDL_GetTicks() / 100) % 6));
 }
