@@ -13,6 +13,8 @@ int main(int argc, char* args[])
 		g_game->handleEvents();
 		g_game->update();
 		g_game->render();
+
+		SDL_Delay(10); // cap frame rate
 	}
 	g_game->clean();
 
