@@ -44,12 +44,18 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 	std::cout << "Init success\n";
 	m_bRunning = true; // start main loop
 
+	m_textureManager.load("assets/animate-alpha.png", "animate", m_pRenderer);
+
 	return true;
 }
 
 void Game::render()
 {
 	SDL_RenderClear(m_pRenderer); // clear renderer to colour;
+
+	m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
+
+	m_textureManager.drawFrame("animate", 100, 100, 128, 82, 1 , m_currentFrame, m_pRenderer);
 
 	SDL_RenderPresent(m_pRenderer); // draw to screen
 }
@@ -83,5 +89,5 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	m_sourceRectangle.x = 128 * int(((SDL_GetTicks() / 100) % 6));
+	m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
 }
