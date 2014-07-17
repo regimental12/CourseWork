@@ -1,15 +1,17 @@
-#pragma once
+#ifndef _Player_
+#define _Player_
 
+#include "SDLGameObject.h"
 #include "GameObject.h"
 
-class Player : public GameObject
+class Player : public SDLGameObject
 {
 public:
-	Player();
+	Player(const LoaderParams* pParams);
 	~Player();
-	void load(int x, int y, int width, int height, std::string textureID);
-	void draw(SDL_Renderer* pRenderer);
+	void draw();
 	void update();
 	void clean();
 };
 
+#endif

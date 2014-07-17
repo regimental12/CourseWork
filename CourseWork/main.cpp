@@ -1,22 +1,28 @@
 #include "Game.h"
 
-Game* g_game = 0;
-
 int main(int argc, char* args[])
 {
-	g_game = new Game();
-
-	g_game->init("chap 1" , 100 , 100 , 640 , 480 , 0);
-
-	while (g_game->running())
+	std::cout << "init game attempt...\n";
+	if (TheGame::Instance()->init("chapter 1" , 100 , 100 , 640 , 480 , false))
 	{
-		g_game->handleEvents();
-		g_game->update();
-		g_game->render();
+		std::cout << "game init success\n";
+		while (TheGame::Instance()->running())
+		{
+			TheGame::Instance()->handleEvents();
+			TheGame::Instance()->update();
+			TheGame::Instance()->render();
 
-		SDL_Delay(10); // cap frame rate
+			SDL_Delay(10);
+		}
 	}
-	g_game->clean();
+	else
+	{
+		std::cout << "freak out cause - " << SDL_GetError() << "\n";
+		return -1;
+	}
+
+	std::cout << " game shut down...\n";
+	TheGame::Instance()->clean();
 
 	return 0;
 }

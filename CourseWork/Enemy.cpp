@@ -1,26 +1,19 @@
 #include "Enemy.h"
 
-
-Enemy::Enemy()
+Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
-}
 
+}
 
 Enemy::~Enemy()
 {
 }
 
-void Enemy::load(int x, int y, int width, int height, std::string textureID)
+void Enemy::draw()
 {
-	GameObject::load(x, y, width, height, textureID);
-}
-
-void Enemy::draw(SDL_Renderer* pRenderer)
-{
-	GameObject::draw(pRenderer);
+	SDLGameObject::draw();
 
 }
-
 
 void Enemy::update()
 {
@@ -33,6 +26,4 @@ void Enemy::update()
 
 void Enemy::clean()
 {
-	GameObject::clean();
-	std::cout << "clean player\n";
 }
