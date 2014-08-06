@@ -27,40 +27,59 @@ public:
 
 	void initialiseJoysticks();
 
-	bool joysticksInitialised() { return m_bJoysticksIntialised; }
+	bool joysticksInitialised() const { return m_bJoysticksIntialised; }
+
+	void reset();
 
 	void clean();
 
 	void update();
 
-	int xvalue(int joy , int stick);
-	int yvalue(int joy , int stick);
+	bool isKeyDown(SDL_Scancode key) const;
 
-	bool getButtonState(int joy, int buttonNumber);
-	bool getMouseButtonState(int buttonNumber);
+	int getAxisX(int joy , int stick) const;
+	int getAxisY(int joy , int stick) const;
+	bool getButtonState(int joy, int buttonNumber) const;
 
-	Vector2D getMousePostion(); 
+	bool getMouseButtonState(int buttonNumber) const;
+	Vector2D getMousePostion() const; 
+
+	
 
 private:
 	InputHandler();
 	~InputHandler();
 
-	static InputHandler* s_pInstance;
-	
+	InputHandler(const InputHandler&);
+	InputHandler& operator=(const InputHandler&);
+
+	//handle keyboard events
+	void onKeyDown();
+	void onKeyUp();
+
+	//handle mouse events
+	void onMouseMove(SDL_Event& event);
+	void onMouseButtonDown(SDL_Event& event);
+	void onMouseButtonUp(SDL_Event& event);
+
+	//handle joystick events
+	void onJoystickAxisMove(SDL_Event& event);
+	void onJoystickButtonDown(SDL_Event& event);
+	void onJoystickButtonUp(SDL_Event& event);
+
+	const Uint8* m_keystates;
+
 	std::vector<SDL_Joystick*> m_joysticks;
-
 	bool m_bJoysticksIntialised;
-
 	std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
-
 	std::vector<std::vector<bool>> m_buttonStates;
-
-	std::vector<bool> m_mouseButtonStates;
-
 	const int m_joystickDeadZone = 10000;
 
+	std::vector<bool> m_mouseButtonStates;
 	Vector2D m_mousePosition;
 
+	static InputHandler* s_pInstance;
+	
 	
 };
 
