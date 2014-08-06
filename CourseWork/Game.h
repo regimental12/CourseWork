@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include <vector>
 #include <iostream>
+#include "InputHandler.h"
 
 class Game
 {

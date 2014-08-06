@@ -41,6 +41,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 		return false;
 	}
 
+	TheInputHandler::Instance()->initialiseJoysticks();
+
 	std::cout << "Init success\n";
 	m_bRunning = true; // start main loop
 
@@ -67,6 +69,8 @@ void Game::render()
 void Game::clean()
 {
 	std::cout << "cleaning game\n";
+	m_bRunning = false;
+	TheInputHandler::Instance()->clean();
 
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
@@ -75,20 +79,7 @@ void Game::clean()
 
 void Game::handleEvents()
 {
-	SDL_Event event;
-
-	if (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-			case SDL_QUIT:
-				m_bRunning = false;
-				break;
-
-			default:
-				break;
-		}
-	}
+	TheInputHandler::Instance()->update();
 }
 
 void Game::update()
