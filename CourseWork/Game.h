@@ -41,7 +41,7 @@ public:
 
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
 
-	GameStateMachine* m_pGameStateMachine;
+	GameStateMachine* getGameStateMachine() { return m_pGameStateMachine; }
 
 private:
 	Game(){};
@@ -55,6 +55,8 @@ private:
 	bool m_bRunning;
 
 	int m_currentFrame;
+
+	GameStateMachine* m_pGameStateMachine;
 };
 
 typedef Game TheGame;
