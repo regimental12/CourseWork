@@ -10,6 +10,10 @@
 #include <vector>
 #include <iostream>
 #include "InputHandler.h"
+#include "GameState.h"
+#include "PlayState.h"
+#include "MenuState.h"
+#include "GameStateMachine.h"
 
 class Game
 {
@@ -36,6 +40,8 @@ public:
 	std::vector<GameObject*> m_gameObjects;
 
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
+
+	GameStateMachine* m_pGameStateMachine;
 
 private:
 	Game(){};

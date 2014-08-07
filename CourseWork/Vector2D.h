@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _Vector2D_
 #define _vector2D_
 
