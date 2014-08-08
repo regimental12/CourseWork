@@ -1,12 +1,9 @@
 #ifndef _MENUSTATE_
 #define _MENUSTATE_
 
-//#include "GameState.h"
+#include "GameState.h"
 #include "GameObject.h"
 #include <vector>
-#include "TextureManager.h"
-//#include "Game.h"
-#include "MenuButton.h"
 
 class MenuState : public GameState
 {
@@ -28,7 +25,7 @@ private:
 	static const std::string s_menuID;
 	static void s_menuToPlay();
 	static void s_exitFromMenu();
-	std::vector<GameObject*> m_GameObjects;
+	std::vector<GameObject*> m_menuObjects;
 };
 
 #endif

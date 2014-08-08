@@ -1,6 +1,13 @@
 #include "Game.h"
 
 
+Game::Game() : m_bRunning(false), m_pRenderer(0), m_pWindow(0){}
+
+Game::~Game()
+{
+	clean();
+}
+
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) // attempt SDL init
@@ -67,12 +74,16 @@ void Game::render()
 void Game::clean()
 {
 	std::cout << "cleaning game\n";
-	m_bRunning = false;
 	TheInputHandler::Instance()->clean();
-
+	//m_bRunning = false;
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();
+}
+
+void Game::quit()
+{
+	m_bRunning = false;
 }
 
 void Game::handleEvents()

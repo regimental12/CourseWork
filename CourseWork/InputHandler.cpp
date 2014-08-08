@@ -3,16 +3,19 @@
 
 InputHandler* InputHandler::s_pInstance = 0;
 
-InputHandler::InputHandler()
+InputHandler::InputHandler() : m_bJoysticksIntialised(false), m_mousePosition(new Vector2D(0, 0)), m_keystates(0)
 {
 	for (int i = 0; i < 3; i++)
 	{
 		m_mouseButtonStates.push_back(false);
 	}
+	
 }
 
 InputHandler::~InputHandler()
 {
+	delete m_mousePosition;
+	delete m_keystates;
 }
 
 void InputHandler::clean()
@@ -192,8 +195,13 @@ void InputHandler::onMouseMove(SDL_Event &event)
 {
 	int i = event.motion.x;
 	std::cout << i;
-	m_mousePosition->setX(event.motion.x);
-	m_mousePosition->setY(event.motion.y);
+	if (m_mousePosition)
+	{
+		m_mousePosition->setX(static_cast<float>(event.motion.x));
+		m_mousePosition->setY(static_cast<float>(event.motion.y));
+	}
+	
+	
 }
 
 void InputHandler::onMouseButtonDown(SDL_Event &event)

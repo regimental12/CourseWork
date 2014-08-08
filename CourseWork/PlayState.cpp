@@ -1,4 +1,9 @@
 #include "PlayState.h"
+#include "TextureManager.h"
+#include "Game.h"
+#include "Player.h"
+#include "InputHandler.h"
+#include <iostream>
 
 const std::string PlayState::s_playID = "PLAY";
 
@@ -28,7 +33,7 @@ void PlayState::render()
 
 bool PlayState::onEnter()
 {
-	if (!theTextureManager::Instance()->load("assets/helicopter.png" , "helicopter" , TheGame::Instance()->getRenderer()))
+	if (theTextureManager::Instance()->load("assets/helicopter.png" , "helicopter" , TheGame::Instance()->getRenderer()) == false)
 	{
 		return false;
 	}

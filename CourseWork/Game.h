@@ -34,6 +34,7 @@ public:
 	void update();
 	void handleEvents();
 	void clean();
+	void quit();
 
 	bool running(){ return m_bRunning; }
 
@@ -41,22 +42,20 @@ public:
 
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
 
-	GameStateMachine* m_pGameStateMachine;
-
 	GameStateMachine* getGameStateMachine() { return m_pGameStateMachine; }
 
 private:
-	Game(){};
-	~Game(){}
+	Game();
+	~Game();
 
 	static Game* s_pInstance;
 
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
+	SDL_Texture* m_pTexture;
 
 	bool m_bRunning;
-
-	int m_currentFrame;
+	GameStateMachine* m_pGameStateMachine;
 
 	
 };

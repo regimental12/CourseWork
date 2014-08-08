@@ -1,4 +1,8 @@
 #include "MenuState.h"
+#include "TextureManager.h"
+#include "Game.h"
+#include "MenuButton.h"
+#include "PlayState.h"
 
 
 MenuState::MenuState()
@@ -13,17 +17,28 @@ const std::string MenuState::s_menuID = "MENU";
 
 void MenuState::update()
 {
-	for (int i = 0; i < m_GameObjects.size() ; i++ )
+	if (m_menuObjects.empty() == false)
 	{
-		m_GameObjects[i]->update();
+		for (int i = 0; i < m_menuObjects.size(); i++)
+		{
+			if (m_menuObjects[i] != 0)
+			{
+				m_menuObjects[i]->update();
+			}
+		}
 	}
+	
 }
 
 void MenuState::render()
 {
-	for (int i = 0; i < m_GameObjects.size(); i++)
+	if (m_menuObjects.empty() == true)
 	{
-		m_GameObjects[i]->draw();
+		return;
+	}
+	for (int i = 0; i < m_menuObjects.size(); i++)
+	{
+		m_menuObjects[i]->draw();
 	}
 }
 
@@ -41,8 +56,8 @@ bool MenuState::onEnter()
 	GameObject* button1 = new MenuButton(new LoaderParams(100, 100, 400, 100, "playbutton"), s_menuToPlay);
 	GameObject* button2 = new MenuButton(new LoaderParams(100, 300, 400, 100, "exitbutton"), s_exitFromMenu);
 
-	m_GameObjects.push_back(button1);
-	m_GameObjects.push_back(button2);
+	m_menuObjects.push_back(button1);
+	m_menuObjects.push_back(button2);
 
 	std::cout << "entering MenuState\n";
 	return true;
@@ -50,12 +65,12 @@ bool MenuState::onEnter()
 
 bool MenuState::onExit()
 {
-	for (int i = 0; i < m_GameObjects.size(); i++)
+	for (int i = 0; i < m_menuObjects.size(); i++)
 	{
-		m_GameObjects[i]->clean();
+		m_menuObjects[i]->clean();
 	}
 
-	m_GameObjects.clear();
+	m_menuObjects.clear();
 	theTextureManager::Instance()->clearFromTextureMap("playbutton");
 	theTextureManager::Instance()->clearFromTextureMap("exitbutton");
 
@@ -71,6 +86,6 @@ void MenuState::s_menuToPlay()
 
 void MenuState::s_exitFromMenu()
 {
-	TheGame::Instance()->clean();
+	TheGame::Instance()->quit();
 	std::cout << "Exit button clicked\n";
 }

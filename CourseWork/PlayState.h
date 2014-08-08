@@ -1,9 +1,10 @@
 #ifndef _PLAYSTATE_
 #define _PLAYSTATE_
 
+#include <vector>
 #include "GameState.h"
 #include "GameObject.h"
-#include "Game.h"
+
 
 class GameObject;
 
