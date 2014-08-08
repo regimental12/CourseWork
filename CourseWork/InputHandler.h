@@ -42,8 +42,9 @@ public:
 	bool getButtonState(int joy, int buttonNumber) const;
 
 	bool getMouseButtonState(int buttonNumber) const;
-	Vector2D getMousePostion() const; 
-
+	
+	Vector2D* m_mousePosition;
+	Vector2D* getMousePostion();
 	
 
 private:
@@ -76,7 +77,7 @@ private:
 	const int m_joystickDeadZone = 10000;
 
 	std::vector<bool> m_mouseButtonStates;
-	Vector2D m_mousePosition;
+	
 
 	static InputHandler* s_pInstance;
 	

@@ -133,7 +133,7 @@ bool InputHandler::getMouseButtonState(int buttonNumber) const
 	return m_mouseButtonStates[buttonNumber];
 }
 
-Vector2D InputHandler::getMousePostion() const
+Vector2D* InputHandler::getMousePostion()
 {
 	return m_mousePosition;
 }
@@ -190,8 +190,10 @@ void InputHandler::onKeyUp()
 
 void InputHandler::onMouseMove(SDL_Event &event)
 {
-	m_mousePosition.setX(event.motion.x);
-	m_mousePosition.setY(event.motion.y);
+	int i = event.motion.x;
+	std::cout << i;
+	m_mousePosition->setX(event.motion.x);
+	m_mousePosition->setY(event.motion.y);
 }
 
 void InputHandler::onMouseButtonDown(SDL_Event &event)

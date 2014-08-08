@@ -17,13 +17,13 @@ void MenuButton::draw()
 
 void MenuButton::update()
 {
-	Vector2D pMousePos = TheInputHandler::Instance()->getMousePostion();
+	/*Vector2D* pMousePos = TheInputHandler::Instance()->getMousePostion();
 
-	if (pMousePos.getX() < (m_postion.getX() + m_width) &&
-		pMousePos.getX() >  m_postion.getX() &&
-		pMousePos.getY() < (m_postion.getY() + m_height) &&
-		pMousePos.getY() >  m_postion.getY())
-	{
+	if (pMousePos->getX() < (m_postion.getX() + m_width) &&
+		pMousePos->getX() >  m_postion.getX() &&
+		pMousePos->getY() < (m_postion.getY() + m_height) &&
+		pMousePos->getY() >  m_postion.getY())
+	{*/
 		m_currentFrame = MOUSEOVER;
 
 		if (TheInputHandler::Instance()->getMouseButtonState(LEFT) && m_bReleased)
@@ -32,12 +32,13 @@ void MenuButton::update()
 			m_callback();
 			m_bReleased = false;
 		}
-	}
-	else if (TheInputHandler::Instance()->getMouseButtonState(LEFT))
-	{
-		m_bReleased = true;
-		m_currentFrame = MOUSEOUT;
-	}
+
+		else if (TheInputHandler::Instance()->getMouseButtonState(LEFT))
+		{
+			m_bReleased = true;
+			m_currentFrame = MOUSEOVER;
+		}
+	//}
 	else
 	{
 		m_currentFrame = MOUSEOUT;
